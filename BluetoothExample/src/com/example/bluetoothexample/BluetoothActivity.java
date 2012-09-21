@@ -1,5 +1,6 @@
 package com.example.bluetoothexample;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
 
@@ -19,6 +20,7 @@ public class BluetoothActivity extends Activity {
 
 	InputStream tmpIn = null;
 	BluetoothSocket socket = null;
+	BluetoothDevice d = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,13 +37,13 @@ public class BluetoothActivity extends Activity {
     	    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
     	    startActivityForResult(enableBtIntent, 1);
     	}
-    	BluetoothDevice device = null;
     	Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-    	for(BluetoothDevice d: pairedDevices){
+    	for(BluetoothDevice d1: pairedDevices){
     		//TODO check to see if we already are set up with the bluetooth device
     	}
     	// Create a BroadcastReceiver for ACTION_FOUND
-    	final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    	BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    		BluetoothDevice device;
     	    public void onReceive(Context context, Intent intent) {
     	        String action = intent.getAction();
     	        // When discovery finds a device
@@ -50,6 +52,7 @@ public class BluetoothActivity extends Activity {
     	            device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
     	            // Add the name and address to an array adapter to show in a ListView
     	            if(device.getName().equals("WHATEVER OURS NAME IS") || device.getAddress().equals("OUR ADDRESS"))
+    	            	d=device;
     	            	//TODO handle this
     	        }
     	    }
@@ -57,10 +60,15 @@ public class BluetoothActivity extends Activity {
     	// Register the BroadcastReceiver
     	IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
     	registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
-    	ConnectThread ct = new ConnectThread(device);
+    	ConnectThread ct = new ConnectThread(d);
     	ct.start();
     	socket = ct.getSocket();
-    	tmpIn = socket.getInputStream(); //gets the input
+    	try {
+			tmpIn = socket.getInputStream();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} //gets the input
     }
     
     public void onActivityResult(int requestCode, int resultCode, Intent data){
