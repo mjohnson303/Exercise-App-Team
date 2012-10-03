@@ -15,7 +15,7 @@
 -->
 
 <resources>
-    <string name="app_name">Bluetooth</string>
+    <string name="app_name">Speed Games</string>
 
     <!--  BluetoothChat -->
     <string name="send">Send</string>
@@ -36,6 +36,7 @@
     <string name="title_other_devices">Other Available Devices</string>
     <string name="button_scan">Scan for devices</string>
     <string name="title_activity_main">Scan for devices</string>
+    <string name="main_page_title">Speed Games</string>
 
     <!-- Options Menu -->
     <string name="secure_connect">Connect a device - Secure</string>

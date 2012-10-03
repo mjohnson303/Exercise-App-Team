@@ -16,6 +16,8 @@
 
 package com.example.minigameapp;
 
+import java.util.ArrayList;
+
 import com.example.minigameapp.R;
 
 import android.app.Activity;
@@ -61,16 +63,16 @@ public class MainPage extends Activity {
 
     // Layout Views
     private TextView mTitle;
-    private ListView mConversationView;
 
     // Name of the connected device
     private String mConnectedDeviceName = null;
-    // Array adapter for the conversation thread
-    private ArrayAdapter<String> mConversationArrayAdapter;
     // Local Bluetooth adapter
     private BluetoothAdapter mBluetoothAdapter = null;
     // Member object for the chat services
     private BluetoothService mService = null;
+    
+    //ArrayList of readings from acceleromter
+    private ArrayList<String> accelReadings;
 
 
     @Override
@@ -80,15 +82,9 @@ public class MainPage extends Activity {
         if(D) Log.e(TAG, "+++ ON CREATE +++");
 
         // Set up the window layout
-        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-        setContentView(R.layout.main);
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
-
-        // Set up the custom title
-        mTitle = (TextView) findViewById(R.id.title_left_text);
-        mTitle.setText(R.string.app_name);
-        mTitle = (TextView) findViewById(R.id.title_right_text);
-
+        setContentView(R.layout.main_page);
+        mTitle = (TextView)findViewById(R.id.mTitle);
+        
         // Get local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -112,7 +108,7 @@ public class MainPage extends Activity {
             startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
         // Otherwise, setup the chat session
         } else {
-            if (mService == null) setupChat();
+            if (mService == null) setupArray();
         }
     }
 
@@ -133,13 +129,11 @@ public class MainPage extends Activity {
         }
     }
 
-    private void setupChat() {
-        Log.d(TAG, "setupChat()");
+    private void setupArray() {
+        Log.d(TAG, "setupArray()");
 
-        // Initialize the array adapter for the conversation thread
-        mConversationArrayAdapter = new ArrayAdapter<String>(this, R.layout.message);
-        mConversationView = (ListView) findViewById(R.id.in);
-        mConversationView.setAdapter(mConversationArrayAdapter);
+        // Initialize the array for the returned readings
+        accelReadings = new ArrayList<String>();
 
         // Initialize the BluetoothService to perform bluetooth connections
         mService = new BluetoothService(this, mHandler);
@@ -186,7 +180,7 @@ public class MainPage extends Activity {
                 case BluetoothService.STATE_CONNECTED:
                     mTitle.setText(R.string.title_connected_to);
                     mTitle.append(mConnectedDeviceName);
-                    mConversationArrayAdapter.clear();
+                    accelReadings.clear();
                     break;
                 case BluetoothService.STATE_CONNECTING:
                     mTitle.setText(R.string.title_connecting);
@@ -197,18 +191,11 @@ public class MainPage extends Activity {
                     break;
                 }
                 break;
-            case MESSAGE_WRITE:
-            	//SHOULD NEVER HAPPEN
-                byte[] writeBuf = (byte[]) msg.obj;
-                // construct a string from the buffer
-                String writeMessage = new String(writeBuf);
-                mConversationArrayAdapter.add("Me:  " + writeMessage);
-                break;
             case MESSAGE_READ:
                 byte[] readBuf = (byte[]) msg.obj;
                 // construct a string from the valid bytes in the buffer
                 String readMessage = new String(readBuf, 0, msg.arg1);
-                mConversationArrayAdapter.add(mConnectedDeviceName+":  " + readMessage);
+                accelReadings.add(" ");//TODO handle what the message sent says
                 break;
             case MESSAGE_DEVICE_NAME:
                 // save the connected device's name
@@ -243,7 +230,7 @@ public class MainPage extends Activity {
             // When the request to enable Bluetooth returns
             if (resultCode == Activity.RESULT_OK) {
                 // Bluetooth is now enabled, so set up a chat session
-                setupChat();
+                setupArray();
             } else {
                 // User did not enable Bluetooth or an error occured
                 Log.d(TAG, "BT not enabled");
