@@ -35,10 +35,10 @@ public class GameLayer extends CCColorLayer{
 	    this.setIsTouchEnabled(true);
 	    CGSize winSize = CCDirector.sharedDirector().displaySize();
 	    
-	    player = CCSprite.sprite("race_car.png");
+	    //player = CCSprite.sprite("race_car2.png");
 	    computer = CCSprite.sprite("race_car.png");
-	    player.setPosition(CGPoint.ccp(player.getContentSize().width / 2.0f,player.getContentSize().height/2.0f));
-	    computer.setPosition(CGPoint.ccp(computer.getContentSize().width / 2.0f+player.getContentSize().width,computer.getContentSize().height/2.0f + player.getContentSize().height));
+	   // player.setPosition(CGPoint.ccp(player.getContentSize().width / 2.0f, winSize.height / 2.0f));
+	    computer.setPosition(CGPoint.ccp(computer.getContentSize().width / 2.0f,winSize.height / 2.0f + player.getContentSize().height*3));
 
 	 
 	    addChild(player);
@@ -55,9 +55,9 @@ public class GameLayer extends CCColorLayer{
 	    int actualDuration = rand.nextInt(rangeDuration) + minDuration;
 	    
 	    Log.d("GameLayer","Set Action");
-		CCMoveTo actionMove = CCMoveTo.action(actualDuration, CGPoint.ccp(-computer.getContentSize().width / 2.0f, finalX));
-	    CCCallFuncN actionMoveDone = CCCallFuncN.action(this, "spriteMoveFinished");
-	    CCSequence actions = CCSequence.actions(actionMove, actionMoveDone);
+		//CCMoveTo actionMove = CCMoveTo.action(actualDuration, CGPoint.ccp(-computer.getContentSize().width / 2.0f, finalX));
+	    //CCCallFuncN actionMoveDone = CCCallFuncN.action(this, "spriteMoveFinished");
+	   // CCSequence actions = CCSequence.actions(actionMove, actionMoveDone);
 	    Log.d("GameLayer", "Start Moving");
 	}
 	
@@ -66,7 +66,7 @@ public class GameLayer extends CCColorLayer{
 		Log.d("GameLayer", "Finished Moving");
 	    //CCSprite sprite = (CCSprite)sender;
 	    //this.removeChild(sprite, true);
-	    this.removeChild(computer, true);
+	    //this.removeChild(computer, true);
 		Log.d("GameLayer", "Remove Sprite");
 	}
 }
