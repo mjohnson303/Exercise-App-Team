@@ -17,8 +17,8 @@ import org.cocos2d.types.ccColor4B;
 import android.util.Log;
 
 public class GameLayer extends CCColorLayer{
-	CCSprite player;
-	CCSprite computer;
+	CCSprite _player;
+	CCSprite _computer;
 	public static CCScene scene()
 	{
 	    CCScene scene = CCScene.node();
@@ -35,29 +35,36 @@ public class GameLayer extends CCColorLayer{
 	    this.setIsTouchEnabled(true);
 	    CGSize winSize = CCDirector.sharedDirector().displaySize();
 	    
-	    //player = CCSprite.sprite("race_car2.png");
-	    computer = CCSprite.sprite("race_car.png");
-	   // player.setPosition(CGPoint.ccp(player.getContentSize().width / 2.0f, winSize.height / 2.0f));
-	    computer.setPosition(CGPoint.ccp(computer.getContentSize().width / 2.0f,winSize.height / 2.0f + player.getContentSize().height*3));
+	    _player = CCSprite.sprite("race_car2.png");
+	    _computer = CCSprite.sprite("race_car.png");
+	    _player.setPosition(CGPoint.ccp(_player.getContentSize().width / 2.0f, winSize.height / 2.0f));
+	    _computer.setPosition(CGPoint.ccp(_computer.getContentSize().width / 2.0f,winSize.height / 2.0f + _player.getContentSize().height*3));
 
 	 
-	    addChild(player);
+	    addChild(_player);
+	    addChild(_computer);
+	    //this.schedule("moveComputer",1.0f);
 	}
-	public void moveCar(){
+	public void moveComputer(){
 		CGSize winSize = CCDirector.sharedDirector().displaySize();
 		float finalX=winSize.width;
 		
 		// Determine speed of the target
 		Random rand = new Random();
 	    int minDuration = 2;
-	    int maxDuration = 4;
+	    int maxDuration = 15;
 	    int rangeDuration = maxDuration - minDuration;
-	    int actualDuration = rand.nextInt(rangeDuration) + minDuration;
+	    //int actualDuration = rand.nextInt(rangeDuration) + minDuration;
+	    int actualDuration=1;
 	    
 	    Log.d("GameLayer","Set Action");
 		//CCMoveTo actionMove = CCMoveTo.action(actualDuration, CGPoint.ccp(-computer.getContentSize().width / 2.0f, finalX));
 	    //CCCallFuncN actionMoveDone = CCCallFuncN.action(this, "spriteMoveFinished");
-	   // CCSequence actions = CCSequence.actions(actionMove, actionMoveDone);
+	    //CCSequence actions = CCSequence.actions(actionMove, actionMoveDone);
+	    //computer.runAction(actions);
+	    CGPoint point = CGPoint.ccp(finalX,winSize.height / 2.0f + _player.getContentSize().height*3);
+	    CCMoveTo actionMove = CCMoveTo.action(10, point);
+	 	_computer.runAction(actionMove);
 	    Log.d("GameLayer", "Start Moving");
 	}
 	
@@ -66,7 +73,7 @@ public class GameLayer extends CCColorLayer{
 		Log.d("GameLayer", "Finished Moving");
 	    //CCSprite sprite = (CCSprite)sender;
 	    //this.removeChild(sprite, true);
-	    //this.removeChild(computer, true);
+	    this.removeChild(_computer, true);
 		Log.d("GameLayer", "Remove Sprite");
 	}
 }
