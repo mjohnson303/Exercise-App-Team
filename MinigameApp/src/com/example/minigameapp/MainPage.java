@@ -31,14 +31,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 //
 /**
  * This is the main Activity that displays the current chat session.
  */
-public class MainPage extends Activity {
+public class MainPage extends Activity implements OnClickListener{
     // Debugging
     private static final String TAG = "Bluetooth";
     private static final boolean D = true;
@@ -60,7 +63,9 @@ public class MainPage extends Activity {
     private static final int REQUEST_ENABLE_BT = 3;
 
     // Layout Views
-    private TextView mTitle;
+    private TextView mTitle, scoreView;
+    private int score;
+    private Button start;
 
     // Name of the connected device
     private String mConnectedDeviceName = null;
@@ -82,6 +87,11 @@ public class MainPage extends Activity {
         // Set up the window layout
         setContentView(R.layout.main_page);
         mTitle = (TextView)findViewById(R.id.mTitle);
+        scoreView = (TextView)findViewById(R.id.score);
+        score=0;
+        start = (Button)findViewById(R.id.start);
+        start.setOnClickListener(this);
+
         
         // Get local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -276,5 +286,22 @@ public class MainPage extends Activity {
         }
         return false;
     }
+    
+    public void win(){
+    	score++;
+    	scoreView.setText("Score: "+score);
+    }
+
+	public void onClick(View arg0) {
+		switch(arg0.getId()){
+		case R.id.start:
+			startGames();
+		}
+		
+	}
+	
+	public void startGames(){
+		//TODO bit ol loop of games
+	}
 
 }
