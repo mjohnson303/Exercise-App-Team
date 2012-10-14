@@ -65,7 +65,7 @@ public class MainPage extends Activity implements OnClickListener{
     // Layout Views
     private TextView mTitle, scoreView;
     private int score;
-    private Button start;
+    private Button start, manageAccount, info;
 
     // Name of the connected device
     private String mConnectedDeviceName = null;
@@ -91,6 +91,10 @@ public class MainPage extends Activity implements OnClickListener{
         score=0;
         start = (Button)findViewById(R.id.start);
         start.setOnClickListener(this);
+        manageAccount = (Button)findViewById(R.id.manageAccount);
+        manageAccount.setOnClickListener(this);
+        info = (Button)findViewById(R.id.info);
+        info.setOnClickListener(this);
 
         
         // Get local Bluetooth adapter
@@ -296,12 +300,21 @@ public class MainPage extends Activity implements OnClickListener{
 		switch(arg0.getId()){
 		case R.id.start:
 			startGames();
-		}
-		
+			break;
+		case R.id.manageAccount:
+			Intent i = new Intent(this, ManageAccount.class);
+			startActivity(i);
+			break;
+		case R.id.info:
+			Toast.makeText(getApplicationContext(), "Application was made by Matthew Johnson and Jonathon Seu for iNatural. Enjoy and have fun using this application designed" +
+					" physical activity.",	Toast.LENGTH_LONG).show();
+			break;
+		}		
 	}
 	
 	public void startGames(){
-		//TODO bit ol loop of games
+		Intent i = new Intent(this, RaceActivity.class);
+		startActivity(i);
 	}
 
 }
