@@ -18,7 +18,7 @@ package com.example.bluetoothexample;
 
 import java.util.Set;
 
-import com.example.android.bluetoothexample.R;
+import com.example.bluetoothexample.R;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;

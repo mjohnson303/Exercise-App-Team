@@ -16,7 +16,7 @@
 
 package com.example.bluetoothexample;
 
-import com.example.android.bluetoothexample.R;
+import com.example.bluetoothexample.R;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
