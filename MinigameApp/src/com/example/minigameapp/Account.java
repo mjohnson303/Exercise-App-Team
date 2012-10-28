@@ -3,11 +3,13 @@ package com.example.minigameapp;
 public class Account {
 	private String name;
 	private int score;
+	private String difficulty;
 	private static volatile Account instance = null;
 
 	public Account(){
 		name="";
 		score=0;
+		setDifficulty("");
 	}
 
 	public static Account getInstance(){
@@ -39,6 +41,14 @@ public class Account {
 	
 	public int getScore(){
 		return score;
+	}
+
+	public String getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(String difficulty) {
+		this.difficulty = difficulty;
 	}
 	
 }

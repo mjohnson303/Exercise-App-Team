@@ -2,6 +2,7 @@ package com.example.minigameapp;
 
 public class ActivityAccesser {
 	private RaceActivity ra;
+	private FootballActivity fa;
 	private static volatile ActivityAccesser instance = null;
 	private float totalValues;
 
@@ -35,5 +36,13 @@ public class ActivityAccesser {
 	
 	public float getValues(){
 		return totalValues;
+	}
+
+	public FootballActivity getFootballActivity() {
+		return fa;
+	}
+
+	public void setFootballActivity(FootballActivity fa) {
+		this.fa = fa;
 	}
 }

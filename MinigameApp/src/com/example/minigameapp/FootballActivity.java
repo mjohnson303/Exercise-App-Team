@@ -14,7 +14,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class RaceActivity extends Activity implements SensorEventListener{
+public class FootballActivity extends Activity implements SensorEventListener{
 	protected CCGLSurfaceView glSurfaceView;
 	private SensorManager sensorManager;
 	private ActivityAccesser access;
@@ -27,7 +27,7 @@ public class RaceActivity extends Activity implements SensorEventListener{
 	    getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	 
 	    access = ActivityAccesser.getInstance();
-	    access.setRaceActivity(this);
+	    access.setFootballActivity(this);
 	    
 	    glSurfaceView = new CCGLSurfaceView(this);
 	    

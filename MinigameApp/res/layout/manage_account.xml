@@ -21,19 +21,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp" />
 
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/title"
-        android:layout_alignRight="@+id/title"
-        android:layout_below="@+id/score"
-        android:layout_marginTop="138dp"
-        android:gravity="center_horizontal"
-        android:text="Submit Data"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp" />
-
     <EditText
         android:id="@+id/name"
         android:layout_width="wrap_content"
@@ -42,7 +29,29 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="61dp"
         android:ems="10"
-        android:inputType="text" 
-        android:hint="Enter Name"/>
+        android:hint="Enter Name"
+        android:inputType="text" />
+
+    <Spinner
+        android:id="@+id/difficultySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/name"
+        android:layout_alignRight="@+id/submit"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="19dp" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/title"
+        android:layout_alignRight="@+id/name"
+        android:layout_below="@+id/spinner1"
+        android:layout_marginTop="18dp"
+        android:gravity="center_horizontal"
+        android:text="Submit Data"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
 
 </RelativeLayout>

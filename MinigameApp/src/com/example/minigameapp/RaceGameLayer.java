@@ -1,7 +1,5 @@
 package com.example.minigameapp;
 
-import java.util.Random;
-
 import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCScene;
@@ -19,9 +17,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 
-public class GameLayer extends CCColorLayer{
+public class RaceGameLayer extends CCColorLayer{
 	private CCSprite _player;
 	private CCSprite _computer;
+	private CCSprite background;
 	private Account a;
 	private static RaceActivity raceActivity;
 	private static float prev;
@@ -32,14 +31,14 @@ public class GameLayer extends CCColorLayer{
 		ActivityAccesser ac = ActivityAccesser.getInstance();
 		raceActivity=ac.getRaceActivity();
 	    CCScene scene = CCScene.node();
-	    CCColorLayer layer = new GameLayer(ccColor4B.ccc4(255, 255, 255, 255));
+	    CCColorLayer layer = new RaceGameLayer(ccColor4B.ccc4(255, 255, 255, 255));
 	 
 	    scene.addChild(layer);
 	 
 	    return scene;
 	}
 	
-	protected GameLayer(ccColor4B color)
+	protected RaceGameLayer(ccColor4B color)
 	{
 	    super(color);
 	    this.setIsTouchEnabled(true);
@@ -50,7 +49,7 @@ public class GameLayer extends CCColorLayer{
 	    _player.setPosition(CGPoint.ccp(_player.getContentSize().width / 2.0f, winSize.height / 2.0f));
 	    _computer.setPosition(CGPoint.ccp(_computer.getContentSize().width / 2.0f,winSize.height / 2.0f + _player.getContentSize().height*3));
 
-	    CCSprite background = CCSprite.sprite("racebackground.png");
+	    background = CCSprite.sprite("racebackground.png");
 	    //background.setTag(1);
 	    background.setAnchorPoint(0, 0);
 	    addChild(background);
@@ -68,19 +67,7 @@ public class GameLayer extends CCColorLayer{
 		CGSize winSize = CCDirector.sharedDirector().displaySize();
 		float finalX=winSize.width;
 		
-		// Determine speed of the target
-		Random rand = new Random();
-	    int minDuration = 2;
-	    int maxDuration = 15;
-	    int rangeDuration = maxDuration - minDuration;
-	    //int actualDuration = rand.nextInt(rangeDuration) + minDuration;
-	    int actualDuration=1;
-	    
 	    Log.d("GameLayer","Set Action");
-		//CCMoveTo actionMove = CCMoveTo.action(actualDuration, CGPoint.ccp(-computer.getContentSize().width / 2.0f, finalX));
-	    //CCCallFuncN actionMoveDone = CCCallFuncN.action(this, "spriteMoveFinished");
-	    //CCSequence actions = CCSequence.actions(actionMove, actionMoveDone);
-	    //computer.runAction(actions);
 	    CGPoint point = CGPoint.ccp(finalX,winSize.height / 2.0f + _player.getContentSize().height*3);
 	    CCMoveTo actionMove = CCMoveTo.action(10, point);
 	 	_computer.runAction(actionMove);
@@ -90,8 +77,6 @@ public class GameLayer extends CCColorLayer{
 	public void spriteMoveFinished(Object sender)
 	{
 		Log.d("GameLayer", "Finished Moving");
-	    //CCSprite sprite = (CCSprite)sender;
-	    //this.removeChild(sprite, true);
 	    this.removeChild(_computer, true);
 		Log.d("GameLayer", "Remove Sprite");
 	}
@@ -100,10 +85,10 @@ public class GameLayer extends CCColorLayer{
 		CGPoint computerPos = _computer.getPosition();
 		CGPoint playerPos = _player.getPosition();
 		CGSize winSize = CCDirector.sharedDirector().displaySize();
-		float finalX=winSize.width;
+		background.setContentSize(winSize.width, winSize.height);
+		float finalX=winSize.width-_player.getContentSize().width;
 		if(computerPos.x==finalX && computerPos.y==winSize.height / 2.0f + _player.getContentSize().height*3){
 			Log.d("checkFinished","Computer Wins");
-			//Toast.makeText(raceActivity.getApplicationContext(), "Computer Wins!",	Toast.LENGTH_LONG).show();
 			CCMenuItemFont item6 = CCMenuItemFont.item("COMPUTER WINS", this, "");
             CCMenuItemFont.setFontSize(14);
             item6.setColor( new ccColor3B(0,0,0));
@@ -119,13 +104,13 @@ public class GameLayer extends CCColorLayer{
 			}
 			Activity context = CCDirector.sharedDirector().getActivity();
 			Intent intent = new Intent(context, MainPage.class);
+			removeChild(menu, true);
 			context.startActivity(intent);
-			//raceActivity.finish();
+			raceActivity.finish();
 		}
-		else if(playerPos.x==finalX && playerPos.y==winSize.height / 2.0f + _player.getContentSize().height){
+		else if(playerPos.x>=finalX && playerPos.y>=winSize.height / 2.0f + _player.getContentSize().height){
 			Log.d("checkFinished","Player Wins");
-			//Toast.makeText(raceActivity.getApplicationContext(), "You Win!",	Toast.LENGTH_LONG).show();
-			CCMenuItemFont item6 = CCMenuItemFont.item("COMPUTER WINS", this, "");
+			CCMenuItemFont item6 = CCMenuItemFont.item("PLAYER WINS", this, "");
             CCMenuItemFont.setFontSize(14);
             item6.setColor( new ccColor3B(0,0,0));
             CCMenu menu = CCMenu.menu(item6);
@@ -138,9 +123,12 @@ public class GameLayer extends CCColorLayer{
 				Log.e("checkFinished","Player - sleep error");
 				e.printStackTrace();
 			}
-			Intent i = new Intent(raceActivity, MainPage.class);//TODO fix this to go back
+			Activity context = CCDirector.sharedDirector().getActivity();
+			Intent i = new Intent(context, MainPage.class);//TODO fix this to go back
+			context.startActivity(i);
+			removeChild(menu, true);
 			raceActivity.startActivity(i);
-			//raceActivity.finish();
+			raceActivity.finish();
 		}
 	}
 	
@@ -148,9 +136,18 @@ public class GameLayer extends CCColorLayer{
 		ActivityAccesser a = ActivityAccesser.getInstance();
 		float curr = a.getValues();
 		float distance = curr-prev;
+		Log.d("Curr",curr+"");
+		Log.d("Prev",prev+"");
+		Log.d("Distance",distance+"");
+		if(prev==0){
+			prev=curr;
+			return;
+		}
 		prev=curr;
+		
 		CGPoint playerPos = _player.getPosition();
-		CGPoint newPoint = CGPoint.ccp(playerPos.x+distance, playerPos.y);
+		Log.d("x",playerPos.x+"");
+		CGPoint newPoint = CGPoint.ccp(playerPos.x+Math.abs(distance), playerPos.y);
 		_player.setPosition(newPoint);
 	}
 }
