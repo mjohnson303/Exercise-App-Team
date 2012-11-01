@@ -1,8 +1,8 @@
 package com.example.minigameapp;
 
-import java.util.Random;
-
 import org.cocos2d.actions.interval.CCMoveTo;
+import org.cocos2d.actions.interval.CCRotateTo;
+import org.cocos2d.actions.interval.CCScaleTo;
 import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
@@ -24,14 +24,13 @@ public class FootballGameLayer extends CCColorLayer{
 	private CCSprite background;
 	private Account a;
 	private static FootballActivity fbActivity;
-	private static float prev;
 	private int time;
 	private CCMenuItemFont item6;
 	private CCMenu menu;
+	private float total;
 	
 	public static CCScene scene()
 	{
-		prev=0;
 		ActivityAccesser ac = ActivityAccesser.getInstance();
 		fbActivity=ac.getFootballActivity();
 	    CCScene scene = CCScene.node();
@@ -45,11 +44,12 @@ public class FootballGameLayer extends CCColorLayer{
 	protected FootballGameLayer(ccColor4B color)
 	{
 	    super(color);
+	    total=0;
 	    this.setIsTouchEnabled(true);
 	    CGSize winSize = CCDirector.sharedDirector().displaySize();
 	    
 	    _fball = CCSprite.sprite("football.png");
-	    _fball.setPosition(CGPoint.ccp(winSize.width/2.0f, winSize.height - _fball.getContentSize().height));
+	    _fball.setPosition(CGPoint.ccp(winSize.width/2.0f,_fball.getContentSize().height));
 
 	    background = CCSprite.sprite("fballbackground.png");
 	    //background.setTag(1);
@@ -60,7 +60,7 @@ public class FootballGameLayer extends CCColorLayer{
 	    a=Account.getInstance();
 	    //this.act=act;
 
-	    item6 = CCMenuItemFont.item("SHAKE FOR STRENGTH. "+time+" SECONDS REMAINING", this, "");
+	    item6 = CCMenuItemFont.item("SHAKE FOR STRENGTH.");
         CCMenuItemFont.setFontSize(14);
         item6.setColor( new ccColor3B(0,0,0));
         menu = CCMenu.menu(item6);
@@ -69,7 +69,7 @@ public class FootballGameLayer extends CCColorLayer{
 	    
 	    addChild(_fball);
 	    schedule("checkFinished");
-	    schedule("displayTime", 2.0f);
+	    schedule("displayTime", 1);
 	}
 	
 	public void spriteMoveFinished(Object sender)
@@ -85,12 +85,15 @@ public class FootballGameLayer extends CCColorLayer{
 		Log.d("diplayTime","START");
 		removeChild(menu, true);
 		if(time>0){
+			ActivityAccesser a = ActivityAccesser.getInstance();
+			total+= a.getValues();
 			item6 = CCMenuItemFont.item("SHAKE FOR STRENGTH. "+time+" SECONDS REMAINING", this, "");
 	        CCMenuItemFont.setFontSize(14);
 	        item6.setColor( new ccColor3B(0,0,0));
 	        menu = CCMenu.menu(item6);
 	        menu.alignItemsVertically();
 	        addChild(menu);
+	        time--;
 		}
 		else{
 			moveFootball();
@@ -101,9 +104,10 @@ public class FootballGameLayer extends CCColorLayer{
 		CGPoint fbPos = _fball.getPosition();
 		CGSize winSize = CCDirector.sharedDirector().displaySize();
 		background.setContentSize(winSize.width, winSize.height);
-		if(true){
-			Log.d("checkFinished","Computer Wins");
-			CCMenuItemFont item6 = CCMenuItemFont.item("COMPUTER WINS", this, "");
+		if(fbPos.equals(CGPoint.ccp(0,winSize.height))){
+			Log.d("checkFinished","YOU LOSE");
+			removeChild(_fball, true);
+			CCMenuItemFont item6 = CCMenuItemFont.item("YOU MISSED THE GOAL", this, "");
             CCMenuItemFont.setFontSize(14);
             item6.setColor( new ccColor3B(0,0,0));
             CCMenu menu = CCMenu.menu(item6);
@@ -122,13 +126,33 @@ public class FootballGameLayer extends CCColorLayer{
 			context.startActivity(intent);
 			fbActivity.finish();
 		}
+		else if(fbPos.equals(CGPoint.ccp(winSize.width/2,winSize.height))){
+			Log.d("checkFinished","YOU WIN");
+			removeChild(_fball, true);
+			CCMenuItemFont item6 = CCMenuItemFont.item("YOU MADE THE GOAL", this, "");
+            CCMenuItemFont.setFontSize(14);
+            item6.setColor( new ccColor3B(0,0,0));
+            CCMenu menu = CCMenu.menu(item6);
+            menu.alignItemsVertically();
+            addChild(menu);
+			a.incScore();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				Log.e("checkFinished","Computer - sleep error");
+				e.printStackTrace();
+			}
+			Activity context = CCDirector.sharedDirector().getActivity();
+			Intent intent = new Intent(context, MainPage.class);
+			removeChild(menu, true);
+			context.startActivity(intent);
+			fbActivity.finish();
+		}
 	}
 	
 	public void moveFootball(){
-		ActivityAccesser a = ActivityAccesser.getInstance();
-		float curr = a.getValues();
-		Log.d("Curr",curr+"");
-		if(curr<12){
+		Log.d("Curr",total+"");
+		if(total<(12*5)){
 			kickFails();
 		}
 		else{
@@ -137,9 +161,14 @@ public class FootballGameLayer extends CCColorLayer{
 	}
 	
 	public void kickFails(){
-		/** CGPoint point = CGPoint.ccp(finalX,winSize.height / 2.0f + _player.getContentSize().height*3);
-	    CCMoveTo actionMove = CCMoveTo.action(10, point);
-	 	_fball.runAction(actionMove);*/
+		CGSize winSize = CCDirector.sharedDirector().displaySize();
+		CGPoint point = CGPoint.ccp(0,winSize.height);
+	    CCRotateTo actionMove = CCRotateTo.action(1, 900);
+	    CCMoveTo actionMove2 = CCMoveTo.action(10, point);
+	    CCScaleTo action3 = CCScaleTo.action(10f, .3f, .3f);
+	 	_fball.runAction(actionMove);
+	 	_fball.runAction(actionMove2);
+	 	_fball.runAction(action3);
 		CGPoint playerPos = _fball.getPosition();
 		Log.d("x",playerPos.x+"");
 		CGPoint newPoint = CGPoint.ccp(playerPos.x, playerPos.y);
@@ -147,9 +176,14 @@ public class FootballGameLayer extends CCColorLayer{
 	}
 	
 	public void kickSucceeds(){
-		/** CGPoint point = CGPoint.ccp(finalX,winSize.height / 2.0f + _player.getContentSize().height*3);
-	    CCMoveTo actionMove = CCMoveTo.action(10, point);
-	 	_fball.runAction(actionMove);*/
+		CGSize winSize = CCDirector.sharedDirector().displaySize();
+		CGPoint point = CGPoint.ccp(winSize.width/2,winSize.height);
+	    CCRotateTo actionMove = CCRotateTo.action(1, 900);
+	    CCMoveTo actionMove2 = CCMoveTo.action(10, point);
+	    CCScaleTo action3 = CCScaleTo.action(10f, .3f, .3f);
+	 	_fball.runAction(actionMove);
+	 	_fball.runAction(actionMove2);
+	 	_fball.runAction(action3);
 		CGPoint playerPos = _fball.getPosition();
 		Log.d("x",playerPos.x+"");
 		CGPoint newPoint = CGPoint.ccp(playerPos.x, playerPos.y);

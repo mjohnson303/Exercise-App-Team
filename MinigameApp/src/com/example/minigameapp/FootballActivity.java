@@ -51,7 +51,7 @@ public class FootballActivity extends Activity implements SensorEventListener{
 	    CCDirector.sharedDirector().setDisplayFPS(true);
 	 
 	    CCDirector.sharedDirector().setAnimationInterval(1.0f / 60.0f);
-	    CCScene scene = RaceGameLayer.scene();
+	    CCScene scene = FootballGameLayer.scene();
 	    CCDirector.sharedDirector().runWithScene(scene);
 	}
 	
