@@ -313,7 +313,7 @@ public class MainPage extends Activity implements OnClickListener{
 	}
 	
 	public void startGames(){
-		Intent i = new Intent(this, RaceActivity.class);
+		Intent i = ActivityAccesser.getInstance().getRandomActivity(this);
 		startActivity(i);
 	}
 

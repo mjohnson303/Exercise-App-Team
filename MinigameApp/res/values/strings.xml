@@ -36,7 +36,7 @@
     <string name="title_other_devices">Other Available Devices</string>
     <string name="button_scan">Scan for devices</string>
     <string name="title_activity_main">Scan for devices</string>
-    <string name="main_page_title">Speed Games</string>
+    <string name="main_page_title">Think Fast!</string>
 
     <!-- Options Menu -->
     <string name="secure_connect">Connect a device - Secure</string>
