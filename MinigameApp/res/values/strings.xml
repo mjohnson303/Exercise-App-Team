@@ -15,7 +15,7 @@
 -->
 
 <resources>
-    <string name="app_name">Speed Games</string>
+    <string name="app_name">Think Fast!</string>
 
     <!--  BluetoothChat -->
     <string name="send">Send</string>
@@ -35,11 +35,12 @@
     <string name="title_paired_devices">Paired Devices</string>
     <string name="title_other_devices">Other Available Devices</string>
     <string name="button_scan">Scan for devices</string>
-    <string name="title_activity_main">Scan for devices</string>
+    <string name="title_activity_main">Think Fast!</string>
     <string name="main_page_title">Think Fast!</string>
 
     <!-- Options Menu -->
     <string name="secure_connect">Connect a device - Secure</string>
     <string name="insecure_connect">Connect a device - Insecure</string>
     <string name="discoverable">Make discoverable</string>
+    <string name="account">Account</string>
 </resources>

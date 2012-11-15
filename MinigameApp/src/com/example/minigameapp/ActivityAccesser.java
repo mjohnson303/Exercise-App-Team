@@ -8,12 +8,16 @@ public class ActivityAccesser {
 	private RaceActivity ra;
 	private FootballActivity fa;
 	private ChopWoodActivity cwa;
+	private JumpingJackActivity jja;
 	private static volatile ActivityAccesser instance = null;
 	private float totalValues;
-	private String[] activities = {"Race","Football"};
+	private String[] activities = {"Race","Football","Chop Wood","Jumping Jacks"};
+	private boolean compWin;
+	private boolean init;
 
 	public ActivityAccesser(){
 		totalValues=0;
+		setInit(false);
 	}
 
 	public static ActivityAccesser getInstance(){
@@ -60,11 +64,15 @@ public class ActivityAccesser {
 	}
 	
 	public Intent getRandomActivity(Context context){
-		int x = (int)(Math.random()*2+1);
+		int x = (int)(Math.random()*4+1);
 		if(x==1)
 			return new Intent(context, RaceActivity.class);
 		else if(x==2)
 			return new Intent(context, FootballActivity.class);
+		else if(x==3)
+			return new Intent(context, ChopWoodActivity.class);
+		else if(x==4)
+			return new Intent(context, JumpingJackActivity.class);
 		else{
 			Log.e("ActivityAccesser", "getRandomActivity failed");
 			return new Intent(context, RaceActivity.class);
@@ -77,5 +85,29 @@ public class ActivityAccesser {
 
 	public void setChopWoodActivity(ChopWoodActivity cwa) {
 		this.cwa = cwa;
+	}
+
+	public JumpingJackActivity getJumpingJackActivity() {
+		return jja;
+	}
+
+	public void setJumpingJackActivity(JumpingJackActivity jja) {
+		this.jja = jja;
+	}
+
+	public boolean isCompWin() {
+		return compWin;
+	}
+
+	public void setCompWin(boolean compWin) {
+		this.compWin = compWin;
+	}
+
+	public boolean isInit() {
+		return init;
+	}
+
+	public void setInit(boolean init) {
+		this.init = init;
 	}
 }

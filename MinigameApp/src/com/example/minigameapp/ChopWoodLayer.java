@@ -12,9 +12,6 @@ import org.cocos2d.types.CGSize;
 import org.cocos2d.types.ccColor3B;
 import org.cocos2d.types.ccColor4B;
 
-
-import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
 
 public class ChopWoodLayer extends CCColorLayer{
@@ -94,20 +91,15 @@ public class ChopWoodLayer extends CCColorLayer{
 			time--;
 		}
 		else{
-			moveFootball();
+			moveAxe();
 		}
 	}
 
 	public void checkFinished(){
-		for(int i=0; i<10000; i++){}
-		Activity context = CCDirector.sharedDirector().getActivity();
-		Intent intent = new Intent(context, MainPage.class);
-		removeChild(menu, true);
-		context.startActivity(intent);
 		cwActivity.finish();
 	}
 
-public void moveFootball(){
+public void moveAxe(){
 	Log.d("Curr",total+"");
 	if(total<(12*5)){
 		fail();
@@ -130,6 +122,7 @@ public void fail(){
 	CCMenu menu = CCMenu.menu(item6);
 	menu.alignItemsVertically();
 	addChild(menu);
+	ActivityAccesser.getInstance().setCompWin(true);
 	Account.getInstance().decScore();
 	checkFinished();
 }
@@ -147,6 +140,7 @@ public void success(){
 	CCMenu menu = CCMenu.menu(item6);
 	menu.alignItemsVertically();
 	addChild(menu);
+	ActivityAccesser.getInstance().setCompWin(false);
 	Account.getInstance().incScore();
 	checkFinished();
 }

@@ -3,18 +3,12 @@ package com.example.minigameapp;
 import org.cocos2d.actions.interval.CCMoveTo;
 import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCScene;
-import org.cocos2d.menus.CCMenu;
-import org.cocos2d.menus.CCMenuItemFont;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGSize;
-import org.cocos2d.types.ccColor3B;
 import org.cocos2d.types.ccColor4B;
 
-
-import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
 
 public class RaceGameLayer extends CCColorLayer{
@@ -87,47 +81,16 @@ public class RaceGameLayer extends CCColorLayer{
 		CGSize winSize = CCDirector.sharedDirector().displaySize();
 		background.setContentSize(winSize.width, winSize.height);
 		float finalX=winSize.width-_player.getContentSize().width;
-		if(computerPos.x==finalX && computerPos.y==winSize.height / 2.0f + _player.getContentSize().height*3){
+		if((computerPos.x-_computer.getContentSize().width)>=finalX){
 			Log.d("checkFinished","Computer Wins");
-			CCMenuItemFont item6 = CCMenuItemFont.item("COMPUTER WINS", this, "");
-            CCMenuItemFont.setFontSize(14);
-            item6.setColor( new ccColor3B(0,0,0));
-            CCMenu menu = CCMenu.menu(item6);
-            menu.alignItemsVertically();
-            addChild(menu);
 			a.decScore();
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				Log.e("checkFinished","Computer - sleep error");
-				e.printStackTrace();
-			}
-			Activity context = CCDirector.sharedDirector().getActivity();
-			Intent intent = new Intent(context, MainPage.class);
-			removeChild(menu, true);
-			context.startActivity(intent);
+			ActivityAccesser.getInstance().setCompWin(true);
 			raceActivity.finish();
 		}
-		else if(playerPos.x>=finalX && playerPos.y>=winSize.height / 2.0f + _player.getContentSize().height){
+		else if((playerPos.x-_player.getContentSize().width)>=finalX){
 			Log.d("checkFinished","Player Wins");
-			CCMenuItemFont item6 = CCMenuItemFont.item("PLAYER WINS", this, "");
-            CCMenuItemFont.setFontSize(14);
-            item6.setColor( new ccColor3B(0,0,0));
-            CCMenu menu = CCMenu.menu(item6);
-            menu.alignItemsVertically();
-            addChild(menu);
 			a.incScore();
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				Log.e("checkFinished","Player - sleep error");
-				e.printStackTrace();
-			}
-			Activity context = CCDirector.sharedDirector().getActivity();
-			Intent i = new Intent(context, MainPage.class);//TODO fix this to go back
-			context.startActivity(i);
-			removeChild(menu, true);
-			raceActivity.startActivity(i);
+			ActivityAccesser.getInstance().setCompWin(false);
 			raceActivity.finish();
 		}
 	}
@@ -136,9 +99,9 @@ public class RaceGameLayer extends CCColorLayer{
 		ActivityAccesser a = ActivityAccesser.getInstance();
 		float curr = a.getValues();
 		float distance = curr-prev;
-		Log.d("Curr",curr+"");
-		Log.d("Prev",prev+"");
-		Log.d("Distance",distance+"");
+		//Log.d("Curr",curr+"");
+		//Log.d("Prev",prev+"");
+		//Log.d("Distance",distance+"");
 		if(prev==0){
 			prev=curr;
 			return;
@@ -146,7 +109,7 @@ public class RaceGameLayer extends CCColorLayer{
 		prev=curr;
 		
 		CGPoint playerPos = _player.getPosition();
-		Log.d("x",playerPos.x+"");
+		//Log.d("x",playerPos.x+"");
 		CGPoint newPoint = CGPoint.ccp(playerPos.x+Math.abs(distance), playerPos.y);
 		_player.setPosition(newPoint);
 	}

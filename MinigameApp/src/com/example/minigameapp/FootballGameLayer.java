@@ -14,9 +14,6 @@ import org.cocos2d.types.CGSize;
 import org.cocos2d.types.ccColor3B;
 import org.cocos2d.types.ccColor4B;
 
-
-import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
 
 public class FootballGameLayer extends CCColorLayer{
@@ -104,48 +101,18 @@ public class FootballGameLayer extends CCColorLayer{
 		CGPoint fbPos = _fball.getPosition();
 		CGSize winSize = CCDirector.sharedDirector().displaySize();
 		background.setContentSize(winSize.width, winSize.height);
-		if(fbPos.equals(CGPoint.ccp(0,winSize.height))){
+		if((fbPos.y>=(winSize.height-70) && fbPos.x<winSize.width/2)|| fbPos.equals(CGPoint.ccp(0,winSize.height))){
 			Log.d("checkFinished","YOU LOSE");
 			removeChild(_fball, true);
-			CCMenuItemFont item6 = CCMenuItemFont.item("YOU MISSED THE GOAL", this, "");
-            CCMenuItemFont.setFontSize(14);
-            item6.setColor( new ccColor3B(0,0,0));
-            CCMenu menu = CCMenu.menu(item6);
-            menu.alignItemsVertically();
-            addChild(menu);
+			ActivityAccesser.getInstance().setCompWin(true);
 			a.decScore();
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				Log.e("checkFinished","Computer - sleep error");
-				e.printStackTrace();
-			}
-			Activity context = CCDirector.sharedDirector().getActivity();
-			Intent intent = new Intent(context, MainPage.class);
-			removeChild(menu, true);
-			context.startActivity(intent);
 			fbActivity.finish();
 		}
-		else if(fbPos.equals(CGPoint.ccp(winSize.width/2,winSize.height))){
+		else if(fbPos.y>=(winSize.height-70) || fbPos.equals(CGPoint.ccp(winSize.width/2,winSize.height))){
 			Log.d("checkFinished","YOU WIN");
 			removeChild(_fball, true);
-			CCMenuItemFont item6 = CCMenuItemFont.item("YOU MADE THE GOAL", this, "");
-            CCMenuItemFont.setFontSize(14);
-            item6.setColor( new ccColor3B(0,0,0));
-            CCMenu menu = CCMenu.menu(item6);
-            menu.alignItemsVertically();
-            addChild(menu);
 			a.incScore();
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				Log.e("checkFinished","Computer - sleep error");
-				e.printStackTrace();
-			}
-			Activity context = CCDirector.sharedDirector().getActivity();
-			Intent intent = new Intent(context, MainPage.class);
-			removeChild(menu, true);
-			context.startActivity(intent);
+			ActivityAccesser.getInstance().setCompWin(false);
 			fbActivity.finish();
 		}
 	}
@@ -164,7 +131,7 @@ public class FootballGameLayer extends CCColorLayer{
 		CGSize winSize = CCDirector.sharedDirector().displaySize();
 		CGPoint point = CGPoint.ccp(0,winSize.height);
 	    CCRotateTo actionMove = CCRotateTo.action(1, 900);
-	    CCMoveTo actionMove2 = CCMoveTo.action(10, point);
+	    CCMoveTo actionMove2 = CCMoveTo.action(25, point);
 	    CCScaleTo action3 = CCScaleTo.action(10f, .3f, .3f);
 	 	_fball.runAction(actionMove);
 	 	_fball.runAction(actionMove2);
@@ -179,7 +146,7 @@ public class FootballGameLayer extends CCColorLayer{
 		CGSize winSize = CCDirector.sharedDirector().displaySize();
 		CGPoint point = CGPoint.ccp(winSize.width/2,winSize.height);
 	    CCRotateTo actionMove = CCRotateTo.action(1, 900);
-	    CCMoveTo actionMove2 = CCMoveTo.action(10, point);
+	    CCMoveTo actionMove2 = CCMoveTo.action(15, point);
 	    CCScaleTo action3 = CCScaleTo.action(10f, .3f, .3f);
 	 	_fball.runAction(actionMove);
 	 	_fball.runAction(actionMove2);

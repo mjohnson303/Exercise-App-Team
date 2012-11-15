@@ -10,7 +10,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -113,7 +112,7 @@ public class RaceActivity extends Activity implements SensorEventListener{
 			
 			//updateRawCount(smoothx,smoothy,smoothz);
 			float total = smoothx + smoothy + smoothz;
-			Log.d("total", total+"");
+			//Log.d("total", total+"");
 			ActivityAccesser a = ActivityAccesser.getInstance();
 			a.setValues(total);
 		}
