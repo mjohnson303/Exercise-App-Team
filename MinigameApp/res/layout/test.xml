@@ -1,0 +1,65 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Sview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="#F00F00" >
+
+        <Button
+            android:id="@+id/one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="46dp"
+            android:gravity="center_horizontal"
+            android:text="Racing"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/one"
+            android:layout_marginTop="46dp"
+            android:gravity="center_horizontal"
+            android:text="Football"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/two"
+            android:layout_marginTop="46dp"
+            android:gravity="center_horizontal"
+            android:text="Chop Wood"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/three"
+            android:layout_marginTop="46dp"
+            android:gravity="center_horizontal"
+            android:text="Jumping Jacks"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/five"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/four"
+            android:layout_marginTop="46dp"
+            android:gravity="center_horizontal"
+            android:text="Lights"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+</ScrollView>

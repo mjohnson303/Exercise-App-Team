@@ -9,9 +9,10 @@ public class ActivityAccesser {
 	private FootballActivity fa;
 	private ChopWoodActivity cwa;
 	private JumpingJackActivity jja;
+	private RGLightActivity la;
 	private static volatile ActivityAccesser instance = null;
 	private float totalValues;
-	private String[] activities = {"Race","Football","Chop Wood","Jumping Jacks"};
+	private String[] activities = {"Race","Football","Chop Wood","Jumping Jacks","Red Light, Green Light"};
 	private boolean compWin;
 	private boolean init;
 
@@ -73,6 +74,8 @@ public class ActivityAccesser {
 			return new Intent(context, ChopWoodActivity.class);
 		else if(x==4)
 			return new Intent(context, JumpingJackActivity.class);
+		else if(x==5)
+			return new Intent(context, RGLightActivity.class);
 		else{
 			Log.e("ActivityAccesser", "getRandomActivity failed");
 			return new Intent(context, RaceActivity.class);
@@ -109,5 +112,13 @@ public class ActivityAccesser {
 
 	public void setInit(boolean init) {
 		this.init = init;
+	}
+
+	public RGLightActivity getLa() {
+		return la;
+	}
+
+	public void setLa(RGLightActivity la) {
+		this.la = la;
 	}
 }
