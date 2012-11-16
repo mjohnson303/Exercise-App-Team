@@ -14,11 +14,11 @@ public class ActivityAccesser {
 	private float totalValues;
 	private String[] activities = {"Race","Football","Chop Wood","Jumping Jacks","Red Light, Green Light"};
 	private boolean compWin;
-	private boolean init;
+	private boolean playedGame;
 
 	public ActivityAccesser(){
 		totalValues=0;
-		setInit(false);
+		playedGame=false;
 	}
 
 	public static ActivityAccesser getInstance(){
@@ -106,19 +106,19 @@ public class ActivityAccesser {
 		this.compWin = compWin;
 	}
 
-	public boolean isInit() {
-		return init;
-	}
-
-	public void setInit(boolean init) {
-		this.init = init;
-	}
-
 	public RGLightActivity getLa() {
 		return la;
 	}
 
 	public void setLa(RGLightActivity la) {
 		this.la = la;
+	}
+
+	public boolean isPlayedGame() {
+		return playedGame;
+	}
+
+	public void setPlayedGame(boolean playedGame) {
+		this.playedGame = playedGame;
 	}
 }

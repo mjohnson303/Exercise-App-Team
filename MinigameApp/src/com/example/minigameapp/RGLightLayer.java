@@ -95,6 +95,7 @@ public class RGLightLayer extends CCColorLayer{
 			Log.d("checkFinished","Player Loses");
 			a.decScore();
 			ActivityAccesser.getInstance().setCompWin(true);
+			ActivityAccesser.getInstance().setPlayedGame(true);
 			rlActivity.finish();
 		}
 		else if(isMoving && isRed && warning==1){
@@ -104,6 +105,7 @@ public class RGLightLayer extends CCColorLayer{
 			Log.d("checkFinished","Player Wins");
 			a.incScore();
 			ActivityAccesser.getInstance().setCompWin(false);
+			ActivityAccesser.getInstance().setPlayedGame(true);
 			rlActivity.finish();
 		}
 	}

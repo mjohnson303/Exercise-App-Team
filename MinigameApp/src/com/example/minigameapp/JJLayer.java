@@ -153,6 +153,7 @@ public class JJLayer extends CCColorLayer{
 			Account.getInstance().decScore();			
 			ActivityAccesser.getInstance().setCompWin(true);
 		}
+		ActivityAccesser.getInstance().setPlayedGame(true);
 		jjActivity.finish();
 	}
 }

@@ -96,52 +96,53 @@ public class ChopWoodLayer extends CCColorLayer{
 	}
 
 	public void checkFinished(){
+		ActivityAccesser.getInstance().setPlayedGame(true);
 		cwActivity.finish();
 	}
 
-public void moveAxe(){
-	Log.d("Curr",total+"");
-	if(total<(12*5)){
-		fail();
+	public void moveAxe(){
+		Log.d("Curr",total+"");
+		if(total<(12*5)){
+			fail();
+		}
+		else{
+			success();
+		}
 	}
-	else{
-		success();
+
+	public void fail(){
+		CCRotateTo actionMove = CCRotateTo.action(1, 45);
+		_axe.runAction(actionMove);
+		CGPoint playerPos = _axe.getPosition();
+		Log.d("x",playerPos.x+"");
+		CGPoint newPoint = CGPoint.ccp(playerPos.x, playerPos.y);
+		_axe.setPosition(newPoint);
+		CCMenuItemFont item6 = CCMenuItemFont.item("YOU DIDN'T CUT HARD ENOUGH", this, "");
+		CCMenuItemFont.setFontSize(14);
+		item6.setColor( new ccColor3B(30,0,0));
+		CCMenu menu = CCMenu.menu(item6);
+		menu.alignItemsVertically();
+		addChild(menu);
+		ActivityAccesser.getInstance().setCompWin(true);
+		Account.getInstance().decScore();
+		checkFinished();
 	}
-}
 
-public void fail(){
-	CCRotateTo actionMove = CCRotateTo.action(1, 45);
-	_axe.runAction(actionMove);
-	CGPoint playerPos = _axe.getPosition();
-	Log.d("x",playerPos.x+"");
-	CGPoint newPoint = CGPoint.ccp(playerPos.x, playerPos.y);
-	_axe.setPosition(newPoint);
-	CCMenuItemFont item6 = CCMenuItemFont.item("YOU DIDN'T CUT HARD ENOUGH", this, "");
-	CCMenuItemFont.setFontSize(14);
-	item6.setColor( new ccColor3B(30,0,0));
-	CCMenu menu = CCMenu.menu(item6);
-	menu.alignItemsVertically();
-	addChild(menu);
-	ActivityAccesser.getInstance().setCompWin(true);
-	Account.getInstance().decScore();
-	checkFinished();
-}
-
-public void success(){
-	CCRotateTo actionMove = CCRotateTo.action(1, 45);
-	_axe.runAction(actionMove);
-	CGPoint playerPos = _axe.getPosition();
-	Log.d("x",playerPos.x+"");
-	CGPoint newPoint = CGPoint.ccp(playerPos.x, playerPos.y);
-	_axe.setPosition(newPoint);
-	CCMenuItemFont item6 = CCMenuItemFont.item("CONGRATULATIONS YOU CUT THE LOG", this, "");
-	CCMenuItemFont.setFontSize(14);
-	item6.setColor( new ccColor3B(30,0,0));
-	CCMenu menu = CCMenu.menu(item6);
-	menu.alignItemsVertically();
-	addChild(menu);
-	ActivityAccesser.getInstance().setCompWin(false);
-	Account.getInstance().incScore();
-	checkFinished();
-}
+	public void success(){
+		CCRotateTo actionMove = CCRotateTo.action(1, 45);
+		_axe.runAction(actionMove);
+		CGPoint playerPos = _axe.getPosition();
+		Log.d("x",playerPos.x+"");
+		CGPoint newPoint = CGPoint.ccp(playerPos.x, playerPos.y);
+		_axe.setPosition(newPoint);
+		CCMenuItemFont item6 = CCMenuItemFont.item("CONGRATULATIONS YOU CUT THE LOG", this, "");
+		CCMenuItemFont.setFontSize(14);
+		item6.setColor( new ccColor3B(30,0,0));
+		CCMenu menu = CCMenu.menu(item6);
+		menu.alignItemsVertically();
+		addChild(menu);
+		ActivityAccesser.getInstance().setCompWin(false);
+		Account.getInstance().incScore();
+		checkFinished();
+	}
 }

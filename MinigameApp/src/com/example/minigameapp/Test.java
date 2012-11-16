@@ -56,13 +56,13 @@ public class Test extends Activity implements OnClickListener{
     public void onResume(){
 		super.onResume();
 		ActivityAccesser ac = ActivityAccesser.getInstance();
-		if(ac.isInit()){
+		if(ac.isPlayedGame()){
 	    	if(ac.isCompWin())
 	    		Toast.makeText(getApplicationContext(), "COMPUTER WINS",	Toast.LENGTH_LONG).show();
 	    	else
 	    		Toast.makeText(getApplicationContext(), "YOU WIN",	Toast.LENGTH_LONG).show();
 		}
-		ac.setInit(true);
+		ac.setPlayedGame(false);
 
     }
 }

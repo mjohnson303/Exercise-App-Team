@@ -85,12 +85,14 @@ public class RaceGameLayer extends CCColorLayer{
 			Log.d("checkFinished","Computer Wins");
 			a.decScore();
 			ActivityAccesser.getInstance().setCompWin(true);
+			ActivityAccesser.getInstance().setPlayedGame(true);
 			raceActivity.finish();
 		}
 		else if((playerPos.x-_player.getContentSize().width)>=finalX){
 			Log.d("checkFinished","Player Wins");
 			a.incScore();
 			ActivityAccesser.getInstance().setCompWin(false);
+			ActivityAccesser.getInstance().setPlayedGame(true);
 			raceActivity.finish();
 		}
 	}

@@ -106,6 +106,7 @@ public class FootballGameLayer extends CCColorLayer{
 			removeChild(_fball, true);
 			ActivityAccesser.getInstance().setCompWin(true);
 			a.decScore();
+			ActivityAccesser.getInstance().setPlayedGame(true);
 			fbActivity.finish();
 		}
 		else if(fbPos.y>=(winSize.height-70) || fbPos.equals(CGPoint.ccp(winSize.width/2,winSize.height))){
@@ -113,6 +114,7 @@ public class FootballGameLayer extends CCColorLayer{
 			removeChild(_fball, true);
 			a.incScore();
 			ActivityAccesser.getInstance().setCompWin(false);
+			ActivityAccesser.getInstance().setPlayedGame(true);
 			fbActivity.finish();
 		}
 	}
