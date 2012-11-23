@@ -65,6 +65,12 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".RGLightActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".DeviceListActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/select_device"
