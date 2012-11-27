@@ -46,7 +46,7 @@ public class FootballGameLayer extends CCColorLayer{
 	    CGSize winSize = CCDirector.sharedDirector().displaySize();
 	    
 	    _fball = CCSprite.sprite("football2.png");
-	    _fball.setPosition(CGPoint.ccp(winSize.width/2.0f,_fball.getContentSize().height));
+	    _fball.setPosition(CGPoint.ccp(winSize.width/2.0f,_fball.getContentSize().height*3));
 
 	    background = CCSprite.sprite("fballbackground.png");
 	    //background.setTag(1);
