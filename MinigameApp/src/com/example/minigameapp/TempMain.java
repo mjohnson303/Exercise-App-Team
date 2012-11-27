@@ -53,14 +53,23 @@ public class TempMain extends Activity implements OnClickListener{
         	Intent i = new Intent(this, ManageAccount.class);
         	startActivity(i);
         	break;
+        case R.id.test:
+        	Intent i2 = new Intent(this, Test.class);
+        	startActivity(i2);
+        	break;
         }
         return false;
     }
     @Override
     public void onResume(){
-    	if(ActivityAccesser.getInstance().isCompWin())
-    		Toast.makeText(getApplicationContext(), "COMPUTER WINS",	Toast.LENGTH_LONG).show();
-    	else
-    		Toast.makeText(getApplicationContext(), "YOU WINS",	Toast.LENGTH_LONG).show();
+    	super.onResume();
+    	ActivityAccesser ac = ActivityAccesser.getInstance();
+		if(ac.isPlayedGame()){
+	    	if(ac.isCompWin())
+	    		Toast.makeText(getApplicationContext(), "COMPUTER WINS",	Toast.LENGTH_LONG).show();
+	    	else
+	    		Toast.makeText(getApplicationContext(), "YOU WIN",	Toast.LENGTH_LONG).show();
+		}
+		ac.setPlayedGame(false);
     }
 }

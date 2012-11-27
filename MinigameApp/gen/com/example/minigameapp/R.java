@@ -21,13 +21,13 @@ public final class R {
         public static final int account=0x7f070018;
         public static final int button_scan=0x7f070006;
         public static final int difficultySpinner=0x7f070010;
-        public static final int discoverable=0x7f07001b;
+        public static final int discoverable=0x7f07001c;
         public static final int five=0x7f070017;
         public static final int four=0x7f070016;
         public static final int header=0x7f070008;
         public static final int in=0x7f070007;
         public static final int info=0x7f07000e;
-        public static final int insecure_connect_scan=0x7f07001a;
+        public static final int insecure_connect_scan=0x7f07001b;
         public static final int mTitle=0x7f07000b;
         public static final int manageAccount=0x7f07000d;
         public static final int name=0x7f07000f;
@@ -35,9 +35,10 @@ public final class R {
         public static final int one=0x7f070013;
         public static final int paired_devices=0x7f070003;
         public static final int score=0x7f07000c;
-        public static final int secure_connect_scan=0x7f070019;
+        public static final int secure_connect_scan=0x7f07001a;
         public static final int start=0x7f070009;
         public static final int submit=0x7f070011;
+        public static final int test=0x7f070019;
         public static final int three=0x7f070015;
         public static final int title=0x7f07000a;
         public static final int title_left_text=0x7f070000;

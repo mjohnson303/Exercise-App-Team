@@ -133,7 +133,7 @@ public class FootballGameLayer extends CCColorLayer{
 		CGSize winSize = CCDirector.sharedDirector().displaySize();
 		CGPoint point = CGPoint.ccp(0,winSize.height);
 	    CCRotateTo actionMove = CCRotateTo.action(1, 900);
-	    CCMoveTo actionMove2 = CCMoveTo.action(25, point);
+	    CCMoveTo actionMove2 = CCMoveTo.action(45, point);
 	    CCScaleTo action3 = CCScaleTo.action(10f, .3f, .3f);
 	 	_fball.runAction(actionMove);
 	 	_fball.runAction(actionMove2);
@@ -148,7 +148,7 @@ public class FootballGameLayer extends CCColorLayer{
 		CGSize winSize = CCDirector.sharedDirector().displaySize();
 		CGPoint point = CGPoint.ccp(winSize.width/2,winSize.height);
 	    CCRotateTo actionMove = CCRotateTo.action(1, 900);
-	    CCMoveTo actionMove2 = CCMoveTo.action(15, point);
+	    CCMoveTo actionMove2 = CCMoveTo.action(30, point);
 	    CCScaleTo action3 = CCScaleTo.action(10f, .3f, .3f);
 	 	_fball.runAction(actionMove);
 	 	_fball.runAction(actionMove2);

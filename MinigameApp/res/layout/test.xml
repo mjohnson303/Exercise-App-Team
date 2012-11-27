@@ -17,7 +17,7 @@
             android:gravity="center_horizontal"
             android:text="Racing"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/two"
@@ -28,7 +28,7 @@
             android:gravity="center_horizontal"
             android:text="Football"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/three"
@@ -39,7 +39,7 @@
             android:gravity="center_horizontal"
             android:text="Chop Wood"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/four"
@@ -50,7 +50,7 @@
             android:gravity="center_horizontal"
             android:text="Jumping Jacks"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/five"
@@ -61,7 +61,7 @@
             android:gravity="center_horizontal"
             android:text="Lights"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
     </RelativeLayout>
 
 </ScrollView>
