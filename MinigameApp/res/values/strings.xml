@@ -16,6 +16,7 @@
 
 <resources>
     <string name="app_name">Think Fast!</string>
+    <string name="app_id">475224292514016</string>
 
     <!--  BluetoothChat -->
     <string name="send">Send</string>

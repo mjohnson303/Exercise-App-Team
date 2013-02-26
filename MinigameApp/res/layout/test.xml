@@ -62,6 +62,16 @@
             android:text="Lights"
             android:textColor="#000000"
             android:textSize="20sp" />
+        <Button
+            android:id="@+id/six"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/five"
+            android:layout_marginTop="46dp"
+            android:gravity="center_horizontal"
+            android:text="Boxing"
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </RelativeLayout>
 
 </ScrollView>

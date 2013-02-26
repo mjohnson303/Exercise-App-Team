@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class Test extends Activity implements OnClickListener{
-	Button one, two, three, four, five;
+	Button one, two, three, four, five,six;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -19,6 +19,8 @@ public class Test extends Activity implements OnClickListener{
         three = (Button)findViewById(R.id.three);
         four = (Button)findViewById(R.id.four);
         five = (Button)findViewById(R.id.five);
+        six = (Button)findViewById(R.id.six);
+        six.setOnClickListener(this);
         five.setOnClickListener(this);
         one.setOnClickListener(this);
         two.setOnClickListener(this);
@@ -47,6 +49,10 @@ public class Test extends Activity implements OnClickListener{
 		case R.id.five:
 			Intent i5 = new Intent(this, RGLightActivity.class);
 			startActivity(i5);
+			break;
+		case R.id.six:
+			Intent i6 = new Intent(this, BoxingActivity.class);
+			startActivity(i6);
 			break;
 		}
 		
