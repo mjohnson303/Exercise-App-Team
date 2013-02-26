@@ -10,11 +10,10 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class BoxingActivity extends Activity implements SensorEventListener{
+public class SpaceActivity extends Activity implements SensorEventListener{
 	protected CCGLSurfaceView glSurfaceView;
 	private SensorManager sensorManager;
 	private ActivityAccesser access;
@@ -27,7 +26,7 @@ public class BoxingActivity extends Activity implements SensorEventListener{
 	    getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	 
 	    access = ActivityAccesser.getInstance();
-	    access.setBa(this);
+	    access.setSpaceActivity(this);
 	    
 	    glSurfaceView = new CCGLSurfaceView(this);
 	    
@@ -51,7 +50,7 @@ public class BoxingActivity extends Activity implements SensorEventListener{
 	    CCDirector.sharedDirector().setDisplayFPS(true);
 	 
 	    CCDirector.sharedDirector().setAnimationInterval(1.0f / 60.0f);
-	    CCScene scene = BoxingGameLayer.scene();
+	    CCScene scene = SpaceLayer.scene();
 	    CCDirector.sharedDirector().runWithScene(scene);
 	}
 	
@@ -113,7 +112,7 @@ public class BoxingActivity extends Activity implements SensorEventListener{
 			
 			//updateRawCount(smoothx,smoothy,smoothz);
 			float total = smoothx + smoothy + smoothz;
-			Log.d("total", total+"");
+			//Log.d("total", total+"");
 			ActivityAccesser a = ActivityAccesser.getInstance();
 			a.setValues(total);
 		}
