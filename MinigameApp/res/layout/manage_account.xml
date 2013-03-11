@@ -1,57 +1,52 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F00F00" >
+    android:background="@drawable/fb_account"     >
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="Manage Account"
-        android:textSize="32dp" />
+     <TextView
+         android:id="@+id/score"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignTop="@+id/name"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="43dp"
+         android:text="Score: "
+         android:textSize="23dp" />
 
-    <TextView
-        android:id="@+id/score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
+     <com.facebook.widget.LoginButton
+         android:id="@+id/login_button"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignTop="@+id/profilePicture"
+         android:layout_marginTop="18dp"
+         android:layout_toLeftOf="@+id/score" />
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/score"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="61dp"
-        android:ems="10"
-        android:hint="Enter Name"
-        android:inputType="text" 
-        android:background="#FFFFFF"/>
+     <com.facebook.widget.ProfilePictureView
+         android:id="@+id/profilePicture"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/postStatusUpdateButton"
+         android:layout_toRightOf="@+id/score"
+         android:gravity="center_horizontal" >
 
-    <Spinner
-        android:id="@+id/difficultySpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/name"
-        android:layout_below="@+id/name"
-        android:layout_marginTop="19dp"
-        android:background="#FFFFFF" />
-
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/difficultySpinner"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
-        android:gravity="center_horizontal"
-        android:text="Submit Data"
-        android:textColor="#000000"
-        android:textSize="20dp" />
+     </com.facebook.widget.ProfilePictureView>
+
+     <Button
+         android:id="@+id/postStatusUpdateButton"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_alignParentLeft="true"
+         android:text="Post Status Update" />
+
+     <TextView
+         android:id="@+id/name"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/login_button"
+         android:layout_centerHorizontal="true"
+         android:layout_marginBottom="49dp"
+         android:text="Greetings "
+         android:textSize="23dp" />
 
 </RelativeLayout>

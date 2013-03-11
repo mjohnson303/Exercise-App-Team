@@ -204,14 +204,22 @@ containing a value of this type.
         public static final int com_facebook_top_background=0x7f02001d;
         public static final int com_facebook_top_button=0x7f02001e;
         public static final int com_facebook_usersettingsfragment_background_gradient=0x7f02001f;
-        public static final int ic_action_search=0x7f020020;
-        public static final int ic_launcher=0x7f020021;
-        public static final int main_bg=0x7f020022;
+        public static final int fb_account=0x7f020020;
+        public static final int ic_action_search=0x7f020021;
+        public static final int ic_launcher=0x7f020022;
+        public static final int login=0x7f020023;
+        public static final int login_button=0x7f020024;
+        public static final int login_down=0x7f020025;
+        public static final int logout=0x7f020026;
+        public static final int logout_button=0x7f020027;
+        public static final int logout_down=0x7f020028;
+        public static final int main_bg=0x7f020029;
     }
     public static final class id {
-        public static final int Sview=0x7f04002f;
-        public static final int account=0x7f040036;
-        public static final int authButton=0x7f04001f;
+        public static final int Sview=0x7f040038;
+        public static final int account=0x7f04003f;
+        public static final int authButton=0x7f040025;
+        public static final int buttonRequest=0x7f040020;
         public static final int button_scan=0x7f04001e;
         public static final int com_facebook_login_activity_progress_bar=0x7f040005;
         public static final int com_facebook_picker_activity_circle=0x7f040004;
@@ -232,42 +240,50 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_login_button=0x7f040017;
         public static final int com_facebook_usersettingsfragment_logo_image=0x7f040015;
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f040016;
-        public static final int difficultySpinner=0x7f040029;
-        public static final int discoverable=0x7f04003a;
-        public static final int five=0x7f040034;
-        public static final int four=0x7f040033;
-        public static final int fragment_container=0x7f04002e;
-        public static final int greeting=0x7f04002d;
-        public static final int header=0x7f040021;
-        public static final int in=0x7f040020;
-        public static final int info=0x7f040027;
-        public static final int insecure_connect_scan=0x7f040039;
+        public static final int discoverable=0x7f040043;
+        public static final int edit=0x7f04001f;
+        public static final int five=0x7f04003d;
+        public static final int four=0x7f04003c;
+        public static final int fragment_container=0x7f040037;
+        public static final int greeting=0x7f040033;
+        public static final int header=0x7f040027;
+        public static final int in=0x7f040026;
+        public static final int info=0x7f04002d;
+        public static final int insecure_connect_scan=0x7f040042;
         public static final int large=0x7f040002;
-        public static final int login_button=0x7f04002c;
-        public static final int mTitle=0x7f040024;
-        public static final int main_ui_container=0x7f04002b;
-        public static final int manageAccount=0x7f040026;
-        public static final int name=0x7f040028;
+        public static final int login=0x7f040024;
+        public static final int login_button=0x7f04002f;
+        public static final int mTitle=0x7f04002a;
+        public static final int main_ui_container=0x7f040032;
+        public static final int manageAccount=0x7f04002c;
+        public static final int name=0x7f04002e;
         public static final int new_devices=0x7f04001d;
         public static final int normal=0x7f040001;
-        public static final int one=0x7f040030;
+        public static final int one=0x7f040039;
         public static final int paired_devices=0x7f04001b;
+        public static final int pickFriendsButton=0x7f040035;
+        public static final int pickPlaceButton=0x7f040036;
         public static final int picker_subtitle=0x7f040014;
-        public static final int score=0x7f040025;
+        public static final int postPhotoButton=0x7f040034;
+        public static final int postStatusUpdateButton=0x7f040031;
+        public static final int profilePicture=0x7f040030;
+        public static final int result=0x7f040021;
+        public static final int score=0x7f04002b;
         public static final int search_box=0x7f040013;
-        public static final int secure_connect_scan=0x7f040038;
-        public static final int six=0x7f040035;
+        public static final int secure_connect_scan=0x7f040041;
+        public static final int six=0x7f04003e;
         public static final int small=0x7f040000;
-        public static final int start=0x7f040022;
-        public static final int submit=0x7f04002a;
-        public static final int test=0x7f040037;
-        public static final int three=0x7f040032;
-        public static final int title=0x7f040023;
+        public static final int start=0x7f040028;
+        public static final int test=0x7f040040;
+        public static final int three=0x7f04003b;
+        public static final int title=0x7f040029;
         public static final int title_left_text=0x7f040018;
         public static final int title_new_devices=0x7f04001c;
         public static final int title_paired_devices=0x7f04001a;
         public static final int title_right_text=0x7f040019;
-        public static final int two=0x7f040031;
+        public static final int two=0x7f04003a;
+        public static final int txt=0x7f040023;
+        public static final int user_pic=0x7f040022;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -287,14 +303,15 @@ containing a value of this type.
         public static final int custom_title=0x7f03000e;
         public static final int device_list=0x7f03000f;
         public static final int device_name=0x7f030010;
-        public static final int login_activity=0x7f030011;
-        public static final int main=0x7f030012;
-        public static final int main_page=0x7f030013;
-        public static final int manage_account=0x7f030014;
-        public static final int message=0x7f030015;
-        public static final int new_login=0x7f030016;
-        public static final int new_main=0x7f030017;
-        public static final int test=0x7f030018;
+        public static final int fb_fetch=0x7f030011;
+        public static final int login_activity=0x7f030012;
+        public static final int main=0x7f030013;
+        public static final int main_page=0x7f030014;
+        public static final int manage_account=0x7f030015;
+        public static final int message=0x7f030016;
+        public static final int new_login=0x7f030017;
+        public static final int new_main=0x7f030018;
+        public static final int test=0x7f030019;
     }
     public static final class menu {
         public static final int activity_main=0x7f090000;
@@ -332,13 +349,18 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_logged_in=0x7f050009;
         public static final int com_facebook_usersettingsfragment_not_logged_in=0x7f05000a;
         public static final int discoverable=0x7f05002e;
+        public static final int error=0x7f050032;
         public static final int hello_world=0x7f050021;
         public static final int insecure_connect=0x7f05002d;
         public static final int main_page_title=0x7f05002b;
         public static final int menu_settings=0x7f050022;
+        public static final int no_friends_selected=0x7f050036;
+        public static final int no_place_selected=0x7f050037;
         public static final int none_found=0x7f050026;
         public static final int none_paired=0x7f050025;
         public static final int not_connected=0x7f05001c;
+        public static final int photo_post=0x7f050034;
+        public static final int pick_seattle_place=0x7f050038;
         /**   DeviceListActivity 
          */
         public static final int scanning=0x7f050023;
@@ -349,12 +371,16 @@ containing a value of this type.
         /**   BluetoothChat 
          */
         public static final int send=0x7f05001b;
+        public static final int status_update=0x7f050033;
+        public static final int success=0x7f050030;
+        public static final int successfully_posted_post=0x7f050031;
         public static final int title_activity_main=0x7f05002a;
         public static final int title_connected_to=0x7f05001f;
         public static final int title_connecting=0x7f05001e;
         public static final int title_not_connected=0x7f050020;
         public static final int title_other_devices=0x7f050028;
         public static final int title_paired_devices=0x7f050027;
+        public static final int you_picked=0x7f050035;
     }
     public static final class style {
         public static final int AppTheme=0x7f080002;

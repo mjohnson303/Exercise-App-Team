@@ -97,7 +97,36 @@ public class NewLogin extends FragmentActivity {
                 handlePendingAction();
             }
         });
+        profilePictureView = (ProfilePictureView) findViewById(R.id.profilePicture);
+        greeting = (TextView) findViewById(R.id.greeting);
 
+        postStatusUpdateButton = (Button) findViewById(R.id.postStatusUpdateButton);
+        postStatusUpdateButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                onClickPostStatusUpdate();
+            }
+        });
+
+        postPhotoButton = (Button) findViewById(R.id.postPhotoButton);
+        postPhotoButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                onClickPostPhoto();
+            }
+        });
+
+        pickFriendsButton = (Button) findViewById(R.id.pickFriendsButton);
+        pickFriendsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                onClickPickFriends();
+            }
+        });
+
+        pickPlaceButton = (Button) findViewById(R.id.pickPlaceButton);
+        pickPlaceButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                onClickPickPlace();
+            }
+        });
         controlsContainer = (ViewGroup) findViewById(R.id.main_ui_container);
 
         final FragmentManager fm = getSupportFragmentManager();
@@ -191,21 +220,118 @@ public class NewLogin extends FragmentActivity {
 
     @SuppressWarnings("incomplete-switch")
     private void handlePendingAction() {
-        PendingAction previouslyPendingAction = pendingAction;
         // These actions may re-set pendingAction if they are still pending, but we assume they
         // will succeed.
         pendingAction = PendingAction.NONE;
 
     }
 
-    private interface GraphObjectWithId extends GraphObject {
-        String getId();
+    private void onClickPostStatusUpdate() {
+        performPublish(PendingAction.POST_STATUS_UPDATE);
     }
 
-    
-    
+    private void onClickPostPhoto() {
+        performPublish(PendingAction.POST_PHOTO);
+    }
 
-    
+    private void showPickerFragment(PickerFragment<?> fragment) {
+        fragment.setOnErrorListener(new PickerFragment.OnErrorListener() {
+            public void onError(PickerFragment<?> pickerFragment, FacebookException error) {
+                showAlert("error", error.getMessage());
+            }
+        });
+
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+
+        controlsContainer.setVisibility(View.GONE);
+
+        // We want the fragment fully created so we can use it immediately.
+        fm.executePendingTransactions();
+
+        fragment.loadData(false);
+    }
+
+    private void onClickPickFriends() {
+        final FriendPickerFragment fragment = new FriendPickerFragment();
+
+        setFriendPickerListeners(fragment);
+
+        showPickerFragment(fragment);
+    }
+
+    private void setFriendPickerListeners(final FriendPickerFragment fragment) {
+        fragment.setOnDoneButtonClickedListener(new FriendPickerFragment.OnDoneButtonClickedListener() {
+            public void onDoneButtonClicked(PickerFragment<?> pickerFragment) {
+                onFriendPickerDone(fragment);
+            }
+        });
+    }
+
+    private void onFriendPickerDone(FriendPickerFragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        fm.popBackStack();
+
+        String results = "";
+
+        Collection<GraphUser> selection = fragment.getSelection();
+        if (selection != null && selection.size() > 0) {
+            ArrayList<String> names = new ArrayList<String>();
+            for (GraphUser user : selection) {
+                names.add(user.getName());
+            }
+            results = TextUtils.join(", ", names);
+        } else {
+            results = "no friends";
+        }
+
+        showAlert("rar", results);
+    }
+
+    private void onPlacePickerDone(PlacePickerFragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        fm.popBackStack();
+
+        String result = "";
+
+        GraphPlace selection = fragment.getSelection();
+        if (selection != null) {
+            result = selection.getName();
+        } else {
+            result = "no place";
+        }
+
+        showAlert("picked", result);
+    }
+
+    private void onClickPickPlace() {
+        final PlacePickerFragment fragment = new PlacePickerFragment();
+        fragment.setLocation(SEATTLE_LOCATION);
+        fragment.setTitleText("place");
+
+        setPlacePickerListeners(fragment);
+
+        showPickerFragment(fragment);
+    }
+
+    private void setPlacePickerListeners(final PlacePickerFragment fragment) {
+        fragment.setOnDoneButtonClickedListener(new PlacePickerFragment.OnDoneButtonClickedListener() {
+            public void onDoneButtonClicked(PickerFragment<?> pickerFragment) {
+                onPlacePickerDone(fragment);
+            }
+        });
+        fragment.setOnSelectionChangedListener(new PlacePickerFragment.OnSelectionChangedListener() {
+            public void onSelectionChanged(PickerFragment<?> pickerFragment) {
+                if (fragment.getSelection() != null) {
+                    onPlacePickerDone(fragment);
+                }
+            }
+        });
+    }
+
     private void showAlert(String title, String message) {
         new AlertDialog.Builder(this)
                 .setTitle(title)
