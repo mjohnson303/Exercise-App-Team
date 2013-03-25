@@ -57,6 +57,10 @@ public class TempMain extends Activity implements OnClickListener{
         	Intent i2 = new Intent(this, Test.class);
         	startActivity(i2);
         	break;
+        case R.id.about:
+        	Intent i3 = new Intent(this, AboutActivity.class);
+        	startActivity(i3);
+        	break;
         }
         return false;
     }

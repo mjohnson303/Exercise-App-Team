@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fb_account"     >
+    android:background="@drawable/fb_account" 
+    android:id="@+id/main_ui_container"    >
 
      <TextView
          android:id="@+id/score"
@@ -37,6 +38,7 @@
          android:layout_height="wrap_content"
          android:layout_alignParentBottom="true"
          android:layout_alignParentLeft="true"
+         android:layout_toLeftOf="@+id/score"
          android:text="Post Status Update" />
 
      <TextView
@@ -48,5 +50,13 @@
          android:layout_marginBottom="49dp"
          android:text="Greetings "
          android:textSize="23dp" />
+
+     <Button
+         android:id="@+id/pickFriendsButton"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_toRightOf="@+id/score"
+         android:text="Pick Some Friends" />
 
 </RelativeLayout>

@@ -107,6 +107,10 @@
         <activity
             android:name=".ManageAccount"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".AboutActivity"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>
