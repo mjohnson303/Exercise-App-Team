@@ -1,0 +1,20 @@
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#FFF">
+            <TextView
+                    android:id="@+id/hi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textColor="#333"
+                    android:textSize="18sp"
+                    android:text="This application is made by the members of the Exercise Team for the INatural VIP group from Georgia Institute of Technology. We are making this application in order to promote physical well being and being fit" />
+
+
+</LinearLayout>
+

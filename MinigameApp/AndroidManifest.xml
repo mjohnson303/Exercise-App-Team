@@ -48,6 +48,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".ShuffleboardActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".BoxingActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait" >
