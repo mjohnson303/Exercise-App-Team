@@ -44,11 +44,15 @@ public class BoxingGameLayer extends CCColorLayer{
 		this.setIsTouchEnabled(true);
 		CGSize winSize = CCDirector.sharedDirector().displaySize();
 
-		_bag = CCSprite.sprite("bag.jpg");
-		_bag.setPosition(CGPoint.ccp(winSize.width/2.0f,_bag.getContentSize().height-35));
-		_glove = CCSprite.sprite("glove.jpg");
-		_glove.setPosition(CGPoint.ccp(winSize.width/2.0f-_bag.getContentSize().width+15,_bag.getContentSize().height/2+5));
+		_bag = CCSprite.sprite("bag.png");
+		//_bag.setPosition(CGPoint.ccp(winSize.width/2.0f,_bag.getContentSize().height-35));
+		_bag.setPosition(CGPoint.ccp(winSize.width/2.0f,winSize.height/2.0f));
+		_glove = CCSprite.sprite("glove.png");
+		
+		//_glove.setPosition(CGPoint.ccp(winSize.width/2.0f-_bag.getContentSize().width+15,_bag.getContentSize().height/2+5));
+		_glove.setPosition(CGPoint.ccp(winSize.width/2.0f-_bag.getContentSize().width+50,winSize.height/2.0f+50));
 
+		
 		background = CCSprite.sprite("gymbg.jpg");
 		//background.setTag(1);
 		background.setAnchorPoint(0, 0);
