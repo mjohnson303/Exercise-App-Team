@@ -39,10 +39,10 @@ public class ShuffleboardLayer extends CCColorLayer{
 	    
 	    isMoving=false;
 	    
-	    _player = CCSprite.sprite("light_runner.png");
+	    _player = CCSprite.sprite("shuffle_puck.png");
 	    _player.setPosition(CGPoint.ccp(winSize.width/2.0f, winSize.height-_player.getContentSize().height));
 
-	    background = CCSprite.sprite("backyard_bg.png");
+	    background = CCSprite.sprite("shuffleboard_bg.png");
 	    //background.setTag(1);
 	    background.setAnchorPoint(0, 0);
 	    addChild(background);
@@ -67,14 +67,14 @@ public class ShuffleboardLayer extends CCColorLayer{
 		CGPoint playerPos = _player.getPosition();
 		CGSize winSize = CCDirector.sharedDirector().displaySize();
 		background.setContentSize(winSize.width, winSize.height);
-		if(!isMoving && playerPos.y>_player.getContentSize().height){
+		if(!isMoving && playerPos.y>200){
 			Log.d("checkFinished","Player Loses");
 			a.decScore();
 			ActivityAccesser.getInstance().setCompWin(true);
 			ActivityAccesser.getInstance().setPlayedGame(true);
 			rlActivity.finish();
 		}
-		else if(isMoving && playerPos.y<0){
+		else if(isMoving && playerPos.y<100){
 			Log.d("checkFinished","Player Loses");
 			a.decScore();
 			ActivityAccesser.getInstance().setCompWin(true);
